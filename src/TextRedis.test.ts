@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import TextRedis from "./TextRedis.ts";
 
 const metadata = {
-    mimetype: "text/x-redis-cli",
+    mimetype: "text/x-redis",
     glyph: "🔴",
     extensions: [".redis", ".rdb"] as const,
 };
@@ -11,7 +11,7 @@ const metadata = {
 describe("TextRedis — instantiation", () => {
     it("instantiates with metadata", () => {
         const h = new TextRedis(metadata);
-        assert.equal(h.mimetype, "text/x-redis-cli");
+        assert.equal(h.mimetype, "text/x-redis");
         assert.equal(h.glyph, "🔴");
     });
 });
