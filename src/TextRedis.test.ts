@@ -91,17 +91,19 @@ describe("TextRedis — extract", () => {
 });
 
 describe("TextRedis — framework integration", () => {
-    it("renders extracted hierarchy via format()", () => {
+    it("renders extracted hierarchy via format()", async () => {
         const h = new TextRedis(metadata);
-        const out = h.symbolsRaw("SET answer 42");
+        const out = await h.symbolsRaw("SET answer 42");
         assert.ok(out.includes("field answer"));
     });
 
-    it("inherits jsonpath query against the symbol outline", async () => {
+    it("jsonpath dispatches against the deep-json ANTLR parse tree (issue #10)", async () => {
+        // Every ANTLR deep tree has a root with a `type` field — verify
+        // jsonpath reaches it via the deep-channel dispatch.
         const h = new TextRedis(metadata);
-        const src = "SET counter 0";
-        const c = await h.query(src, "jsonpath", "$.counter");
-        assert.equal(c.length, 1);
+        const roots = await h.query("class Probe {}", "jsonpath", "$.type");
+        assert.equal(roots.length, 1);
+        assert.equal(typeof roots[0].matched, "string");
     });
 });
 
