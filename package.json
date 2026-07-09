@@ -1,6 +1,6 @@
 {
     "name": "@plurnk/plurnk-mimetypes-text-redis",
-    "version": "0.3.7",
+    "version": "0.3.8",
     "description": "text/x-redis mimetype handler for plurnk-service. ANTLR-backed extraction via grammars-v4.",
     "type": "module",
     "license": "MIT",
